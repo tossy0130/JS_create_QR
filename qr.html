@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <style>
+        #qr_box {
+            margin: 50px 0 0 50px;
+        }
+
+       /* input要素の共通スタイル */
+        input {
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-family: inherit;
+        color: #666;
+        }
+
+        /* focus時のスタイル */
+        input:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        outline: none;
+        }
+
+        /* placeholderのスタイル */
+        input::placeholder {
+        color: #ccc;
+        }
+
+        #qr_size {
+            width: 30%;
+            display: block;
+        }
+
+        #text {
+            width: 60%;
+            display: block;
+        }
+
+        /* button要素の共通スタイル */
+        button {
+        display: inline-block;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin: 10px 0;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        background-color: #4CAF50;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        }
+
+        /* hover時のスタイル */
+        button:hover {
+        background-color: #3E8E41;
+        }
+
+        /* active時のスタイル */
+        button:active {
+        background-color: #2E6333;
+        }
+
+        /* disabled時のスタイル */
+        button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        }
+
+
+    </style>
+
+    </head>
+    <body>
+
+<h1>JIM コンピューターサービス QRコード生成</h1>
+<p>
+QRコードのサイズを入力してください。
+<input id="qr_size" value="" placeholder="（例）400">
+</p>
+
+<p>
+QRコードにしたいサイトのURLを入力してください。
+<input id="text" value="" placeholder="http://nifle.sakura.ne.jp/mid_g_tellus/index.php">
+</p>
+<button onclick="createQRcode();">QRコードを生成する</button>
+
+<div id="qr_box">
+<div id="qrcode">URLを入力されますと、こちらにQRコードが生成されます。</div>
+</div>
+    
+    <!-- jQueryとqrcode.min.jsのCDNを読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script>
+
+      function createQRcode() {
+
+            // URL 取得
+            var qrtext = $("#text").val();
+
+            // QR コードサイズ取得
+            var qr_xy = $('#qr_size').val();
+
+            $(function () {
+                $('#qrcode').qrcode({
+                    text: qrtext,
+                    width: qr_xy, // 横
+                    height: qr_xy, // 縦
+                    background: "#fff",
+                    foreground: "#000",
+                });
+            });
+            $('#qrcode').html('<div></div>');
+        };
+
+
+    </script>
+        
+
+    
+    </body>
+</html>
